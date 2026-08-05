@@ -72,7 +72,7 @@ struct ProgramView: View {
                                         .fill(isCompleted(workout) ? Color.green.opacity(0.15) : Color.accentColor.opacity(0.12))
                                         .frame(width: 42, height: 42)
                                     Image(systemName: isCompleted(workout) ? "checkmark" : "\(workout.day).circle.fill")
-                                        .foregroundStyle(isCompleted(workout) ? .green : .tint)
+                                        .foregroundStyle(isCompleted(workout) ? .green : .blue)
                                 }
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(workout.title).font(.headline)
