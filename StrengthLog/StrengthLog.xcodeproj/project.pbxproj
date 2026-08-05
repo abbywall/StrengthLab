@@ -1,0 +1,40 @@
+// !$*UTF8*$!
+{
+ archiveVersion = 1;
+ classes = {};
+ objectVersion = 56;
+ objects = {
+  A10000000000000000000001 = {isa = PBXGroup; children = (A10000000000000000000002, A10000000000000000000003); sourceTree = "<group>";};
+  A10000000000000000000002 = {isa = PBXGroup; children = (B10000000000000000000001, B10000000000000000000002, B10000000000000000000003, B10000000000000000000004, B10000000000000000000005, B10000000000000000000006, B10000000000000000000007, B10000000000000000000008); path = StrengthLog; sourceTree = "<group>";};
+  A10000000000000000000003 = {isa = PBXGroup; children = (D10000000000000000000001); name = Products; sourceTree = "<group>";};
+  B10000000000000000000001 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthLogApp.swift; sourceTree = "<group>";};
+  B10000000000000000000002 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>";};
+  B10000000000000000000003 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutStore.swift; sourceTree = "<group>";};
+  B10000000000000000000004 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>";};
+  B10000000000000000000005 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>";};
+  B10000000000000000000006 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisePickerView.swift; sourceTree = "<group>";};
+  B10000000000000000000007 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionView.swift; sourceTree = "<group>";};
+  B10000000000000000000008 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>";};
+  D10000000000000000000001 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StrengthLog.app; sourceTree = BUILT_PRODUCTS_DIR;};
+  C10000000000000000000001 = {isa = PBXBuildFile; fileRef = B10000000000000000000001;};
+  C10000000000000000000002 = {isa = PBXBuildFile; fileRef = B10000000000000000000002;};
+  C10000000000000000000003 = {isa = PBXBuildFile; fileRef = B10000000000000000000003;};
+  C10000000000000000000004 = {isa = PBXBuildFile; fileRef = B10000000000000000000004;};
+  C10000000000000000000005 = {isa = PBXBuildFile; fileRef = B10000000000000000000005;};
+  C10000000000000000000006 = {isa = PBXBuildFile; fileRef = B10000000000000000000006;};
+  C10000000000000000000007 = {isa = PBXBuildFile; fileRef = B10000000000000000000007;};
+  C10000000000000000000008 = {isa = PBXBuildFile; fileRef = B10000000000000000000008;};
+  E10000000000000000000001 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (C10000000000000000000001,C10000000000000000000002,C10000000000000000000003,C10000000000000000000004,C10000000000000000000005,C10000000000000000000006,C10000000000000000000007,C10000000000000000000008); runOnlyForDeploymentPostprocessing = 0;};
+  E10000000000000000000002 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
+  E10000000000000000000003 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
+  F10000000000000000000001 = {isa = PBXNativeTarget; buildConfigurationList = F10000000000000000000003; buildPhases = (E10000000000000000000001,E10000000000000000000002,E10000000000000000000003); buildRules = (); dependencies = (); name = StrengthLog; productName = StrengthLog; productReference = D10000000000000000000001; productType = "com.apple.product-type.application";};
+  F10000000000000000000002 = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = 1; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = {F10000000000000000000001 = {CreatedOnToolsVersion = 16.0;};};}; buildConfigurationList = F10000000000000000000004; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = A10000000000000000000001; productRefGroup = A10000000000000000000003; projectDirPath = ""; projectRoot = ""; targets = (F10000000000000000000001);};
+  F10000000000000000000003 = {isa = XCConfigurationList; buildConfigurations = (G10000000000000000000001,G10000000000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+  F10000000000000000000004 = {isa = XCConfigurationList; buildConfigurations = (G10000000000000000000003,G10000000000000000000004); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+  G10000000000000000000001 = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = StrengthLog/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.example.StrengthLog; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1;}; name = Debug;};
+  G10000000000000000000002 = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = StrengthLog/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 17.0; MARKETING_VERSION = 1.0; PRODUCT_BUNDLE_IDENTIFIER = com.example.StrengthLog; PRODUCT_NAME = "$(TARGET_NAME)"; SDKROOT = iphoneos; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = 1;}; name = Release;};
+  G10000000000000000000003 = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; COPY_PHASE_STRIP = NO; DEBUG_INFORMATION_FORMAT = dwarf; ENABLE_TESTABILITY = YES; GCC_C_LANGUAGE_STANDARD = gnu17; IPHONEOS_DEPLOYMENT_TARGET = 17.0; ONLY_ACTIVE_ARCH = YES; SDKROOT = iphoneos; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;}; name = Debug;};
+  G10000000000000000000004 = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym"; ENABLE_NS_ASSERTIONS = NO; GCC_C_LANGUAGE_STANDARD = gnu17; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; VALIDATE_PRODUCT = YES;}; name = Release;};
+ };
+ rootObject = F10000000000000000000002;
+}
