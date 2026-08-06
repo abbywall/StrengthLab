@@ -1,5 +1,37 @@
 import Foundation
 
+enum ProgramType: String, Codable, CaseIterable, Identifiable {
+    case rockClimbing
+    case mountaineering
+    case trailRunning
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .rockClimbing: return "Rock Climbing"
+        case .mountaineering: return "Mountaineering"
+        case .trailRunning: return "Trail Running"
+        }
+    }
+
+    var subtitle: String {
+        switch self {
+        case .rockClimbing: return "Pulling strength, grip endurance, shoulders, and core"
+        case .mountaineering: return "Uphill strength, loaded carries, durability, and stability"
+        case .trailRunning: return "Single-leg strength, downhill resilience, hips, and calves"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .rockClimbing: return "figure.climbing"
+        case .mountaineering: return "mountain.2.fill"
+        case .trailRunning: return "figure.run"
+        }
+    }
+}
+
 struct Exercise: Identifiable, Codable, Hashable {
     let id: UUID
     let name: String
@@ -45,6 +77,7 @@ struct Workout: Identifiable, Codable, Hashable {
     var durationSeconds: Int
     var programWeek: Int?
     var programDay: Int?
+    var programType: ProgramType?
 
     init(
         id: UUID = UUID(),
@@ -52,7 +85,8 @@ struct Workout: Identifiable, Codable, Hashable {
         exercises: [WorkoutExercise],
         durationSeconds: Int = 0,
         programWeek: Int? = nil,
-        programDay: Int? = nil
+        programDay: Int? = nil,
+        programType: ProgramType? = nil
     ) {
         self.id = id
         self.date = date
@@ -60,6 +94,7 @@ struct Workout: Identifiable, Codable, Hashable {
         self.durationSeconds = durationSeconds
         self.programWeek = programWeek
         self.programDay = programDay
+        self.programType = programType
     }
 }
 
@@ -79,11 +114,12 @@ struct PlannedExercise: Identifiable, Hashable {
 }
 
 struct ProgramWorkout: Identifiable, Hashable {
+    let programType: ProgramType
     let week: Int
     let day: Int
     let title: String
     let focus: String
     let exercises: [PlannedExercise]
 
-    var id: String { "week-\(week)-day-\(day)" }
+    var id: String { "\(programType.rawValue)-week-\(week)-day-\(day)" }
 }

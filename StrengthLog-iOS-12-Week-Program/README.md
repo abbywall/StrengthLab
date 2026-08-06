@@ -4,26 +4,24 @@ A native SwiftUI workout tracker for iPhone.
 
 ## Features
 
-- Built-in 12-week strength program designed for three workouts per week
-- Foundation, build, strength, and deload phases
-- Preset exercises, sets, and target repetitions for all 36 sessions
-- Program completion tracking
-- Custom workout builder with searchable exercise library
-- Weight, repetition, and set logging
-- Automatic configurable rest timer after completing a set
-- Local workout history using UserDefaults
-- No external packages or accounts required
+- Log weight, reps, and sets
+- Automatic rest timer after a completed set
+- Searchable custom exercise selection
+- Local workout history
+- Three selectable 12-week strength programs, each built around three sessions per week:
+  - Rock Climbing Fitness
+  - Mountaineering Fitness
+  - Trail Running Fitness
+- Separate completion tracking for all 36 sessions in each program
 
 ## Run the app
 
-1. Open `StrengthLog.xcodeproj` in Xcode 16 or newer.
+1. Open `StrengthLog.xcodeproj` in Xcode.
 2. Select the StrengthLog target.
-3. Under Signing & Capabilities, select your Apple Development Team.
-4. Choose an iPhone simulator or connected iPhone.
+3. In Signing & Capabilities, choose your Apple development team.
+4. Select an iPhone simulator or connected iPhone.
 5. Press Run.
 
-The project targets iOS 17 and newer.
+The project targets iOS 17 or later and uses no third-party packages.
 
-## Program schedule
-
-The preset plan is organized around three nonconsecutive training days, such as Monday, Wednesday, and Friday. Users should choose weights that allow good technique and follow the effort guidance shown for each phase.
+> Training plans are general fitness templates, not individualized medical advice. Adjust exercises and loading for your experience, equipment, recovery, and any clinician guidance.

@@ -2,11 +2,16 @@ import SwiftUI
 
 struct ProgramView: View {
     @EnvironmentObject private var store: WorkoutStore
+    @AppStorage("strengthLog.selectedProgramType") private var selectedProgramRaw = ProgramType.rockClimbing.rawValue
     @State private var selectedWeek = 1
     @State private var activeWorkout: ProgramWorkout?
 
+    private var selectedProgram: ProgramType {
+        ProgramType(rawValue: selectedProgramRaw) ?? .rockClimbing
+    }
+
     private var workouts: [ProgramWorkout] {
-        TrainingProgram.workouts(for: selectedWeek)
+        TrainingProgram.workouts(for: selectedWeek, type: selectedProgram)
     }
 
     var body: some View {
@@ -16,23 +21,55 @@ struct ProgramView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("12-Week Strength Program")
+                                Text("12-Week Training Programs")
                                     .font(.title2.bold())
-                                Text("Three full-body workouts each week")
+                                Text("Three strength sessions each week")
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
-                            Image(systemName: "calendar.badge.checkmark")
+                            Image(systemName: selectedProgram.icon)
                                 .font(.largeTitle)
                                 .foregroundStyle(.tint)
                         }
 
                         ProgressView(value: Double(completedCount), total: 36)
-                        Text("\(completedCount) of 36 workouts completed")
+                        Text("\(completedCount) of 36 \(selectedProgram.title.lowercased()) workouts completed")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     .padding(.vertical, 6)
+                }
+
+                Section("Choose Program") {
+                    ForEach(ProgramType.allCases) { type in
+                        Button {
+                            selectedProgramRaw = type.rawValue
+                            selectedWeek = 1
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: type.icon)
+                                    .font(.title2)
+                                    .frame(width: 34)
+                                    .foregroundStyle(selectedProgram == type ? Color.accentColor : Color.secondary)
+
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(type.title)
+                                        .font(.headline)
+                                        .foregroundStyle(.primary)
+                                    Text(type.subtitle)
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Spacer()
+
+                                Image(systemName: selectedProgram == type ? "checkmark.circle.fill" : "circle")
+                                    .foregroundStyle(selectedProgram == type ? Color.accentColor : Color.secondary)
+                            }
+                            .padding(.vertical, 4)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
 
                 Section("Choose Week") {
@@ -48,7 +85,7 @@ struct ProgramView: View {
                     VStack(alignment: .leading, spacing: 6) {
                         Text(TrainingProgram.phase(for: selectedWeek))
                             .font(.headline)
-                        Text(TrainingProgram.guidance(for: selectedWeek))
+                        Text(TrainingProgram.guidance(for: selectedWeek, type: selectedProgram))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -72,7 +109,7 @@ struct ProgramView: View {
                                         .fill(isCompleted(workout) ? Color.green.opacity(0.15) : Color.accentColor.opacity(0.12))
                                         .frame(width: 42, height: 42)
                                     Image(systemName: isCompleted(workout) ? "checkmark" : "\(workout.day).circle.fill")
-                                        .foregroundStyle(isCompleted(workout) ? .green : .blue)
+                                        .foregroundStyle(isCompleted(workout) ? Color.green : Color.accentColor)
                                 }
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(workout.title).font(.headline)
@@ -90,20 +127,21 @@ struct ProgramView: View {
                 }
 
                 Section("Suggested Schedule") {
-                    Label("Monday · Workout A", systemImage: "1.circle")
-                    Label("Wednesday · Workout B", systemImage: "2.circle")
-                    Label("Friday · Workout C", systemImage: "3.circle")
-                    Text("Keep at least one recovery day between sessions whenever possible.")
+                    Label("Monday · Session 1", systemImage: "1.circle")
+                    Label("Wednesday · Session 2", systemImage: "2.circle")
+                    Label("Friday · Session 3", systemImage: "3.circle")
+                    Text("Keep at least one recovery day between strength sessions and coordinate these workouts with your climbing, hiking, or running volume.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
-            .navigationTitle("Program")
+            .navigationTitle("Programs")
             .fullScreenCover(item: $activeWorkout) { workout in
                 WorkoutSessionView(
                     plannedExercises: workout.exercises,
                     programWeek: workout.week,
-                    programDay: workout.day
+                    programDay: workout.day,
+                    programType: workout.programType
                 ) {
                     activeWorkout = nil
                 }
@@ -114,14 +152,18 @@ struct ProgramView: View {
 
     private var completedCount: Int {
         Set(store.workoutHistory.compactMap { workout -> String? in
-            guard let week = workout.programWeek, let day = workout.programDay else { return nil }
+            guard workout.programType == selectedProgram,
+                  let week = workout.programWeek,
+                  let day = workout.programDay else { return nil }
             return "\(week)-\(day)"
         }).count
     }
 
     private func isCompleted(_ workout: ProgramWorkout) -> Bool {
         store.workoutHistory.contains {
-            $0.programWeek == workout.week && $0.programDay == workout.day
+            $0.programType == workout.programType &&
+            $0.programWeek == workout.week &&
+            $0.programDay == workout.day
         }
     }
 }
@@ -135,6 +177,9 @@ private struct ProgramWorkoutDetailView: View {
         List {
             Section {
                 VStack(alignment: .leading, spacing: 8) {
+                    Label(workout.programType.title, systemImage: workout.programType.icon)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.tint)
                     Text(workout.focus)
                         .font(.title3.bold())
                     Text("Week \(workout.week) · Day \(workout.day)")

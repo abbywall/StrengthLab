@@ -15,6 +15,7 @@ struct WorkoutSessionView: View {
 
     private let programWeek: Int?
     private let programDay: Int?
+    private let programType: ProgramType?
     let onFinish: () -> Void
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -22,6 +23,7 @@ struct WorkoutSessionView: View {
         _workoutExercises = State(initialValue: exercises.map { WorkoutExercise(exercise: $0) })
         self.programWeek = nil
         self.programDay = nil
+        self.programType = nil
         self.onFinish = onFinish
     }
 
@@ -29,6 +31,7 @@ struct WorkoutSessionView: View {
         plannedExercises: [PlannedExercise],
         programWeek: Int,
         programDay: Int,
+        programType: ProgramType,
         onFinish: @escaping () -> Void
     ) {
         _workoutExercises = State(initialValue: plannedExercises.map { planned in
@@ -41,6 +44,7 @@ struct WorkoutSessionView: View {
         })
         self.programWeek = programWeek
         self.programDay = programDay
+        self.programType = programType
         self.onFinish = onFinish
     }
 
@@ -146,7 +150,8 @@ struct WorkoutSessionView: View {
                 exercises: workoutExercises,
                 durationSeconds: duration,
                 programWeek: programWeek,
-                programDay: programDay
+                programDay: programDay,
+                programType: programType
             )
         )
         onFinish()
